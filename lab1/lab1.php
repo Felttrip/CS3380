@@ -1,3 +1,8 @@
+<!--Nathaniel Thompson
+    CS3380 Lab1
+    1/31/14 -->
+
+<!--HTML givin from lab-->
 <html>
 <head/>
 <body>
@@ -20,6 +25,7 @@
 </table>
 </form>
 
+<!--PHP written by Nathaniel Thompson-->
 <?php
 //check for button press
 if(isset($_POST["submit"]))
