@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset=UTF-8>
     <title>Nathaniel Thompson Lab 2</title>
 
     <body>
@@ -33,16 +34,17 @@
   switch ($value)
   {
     case 1:
-      $query = 'SELECT name,region,continent,government_form FROM lab2.country WHERE surface_area > 2000000';
+      $query = 'SELECT name,region,continent,government_form FROM lab2.country WHERE surface_area > 2000000 ORDER BY name';
       echo "Countrys with a surface area over 2000000";
       break;
     case 2:
-      $query = 'SELECT name, language FROM lab2.country AS co, lab2.country_language AS cl WHERE(cl.percentage>50) AND (cl.is_official = false) AND  (co.country_code=cl.country_code)';
-
+      $query = 'SELECT name, language FROM lab2.country AS co, lab2.country_language AS cl WHERE(cl.percentage>50) AND (cl.is_official = false) AND  (co.country_code=cl.country_code) ORDER BY language';
       break;
     case 3:
+      $query = 'SELECT DISTINCT language FROM lab2.country AS co, lab2.country_language AS cl WHERE(cl.percentage<10) AND (cl.is_official = true) ORDER BY language';
       break;
     case 4:
+      $query = 'SELECT co.name as CountryName, ci.population, ci.name, ci.district FROM lab2.country AS co, lab2.city as ci WHERE (co.country_code=ci.country_code) ORDER BY co.name, ci.population DESC, ci.name';
       break;
     case 5:
       break;
