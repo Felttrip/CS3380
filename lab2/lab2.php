@@ -47,7 +47,9 @@
       $query = 'SELECT ci.name, ci.district, co.name as CountryName FROM lab2.country AS co, lab2.city as ci WHERE (co.country_code=ci.country_code) ORDER BY co.name, ci.population DESC, ci.name';
       break;
     case 5:
-      $query = 'SELECT co.name, ci.name AS capital, language, round(((percentage/100)*co.population)::numeric,0) AS population FROM lab2.country AS co, lab2.city AS ci, lab2.country_language AS cl WHERE (co.capital = ci.id) AND (co.country_code=cl.country_code) AND (is_official=true) ORDER BY co.name, population DESC, capital';
+      $query = 'SELECT co.name, ci.name AS capital, language, round(((percentage/100)*co.population)::numeric,0) AS population 
+                FROM lab2.country AS co, lab2.city AS ci, lab2.country_language AS cl 
+                WHERE (co.capital = ci.id) AND (co.country_code=cl.country_code) AND (is_official=true) ORDER BY co.name, population DESC, capital';
       break;
     case 6:
       break;
