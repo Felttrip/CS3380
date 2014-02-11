@@ -25,21 +25,15 @@
   </head>
 </html>
 <?php
+  //set up database
   include("../secure/database.php");
-  $conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die(pg_last_error());
-  if($conn)
-  {
-    echo "<p>Good connect to DB</p>";
-  }
-  else
-  {
-    echo "<p> Failed to connect to DB</p>";
-  }
+  $conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die('Could not connect:' . pg_last_error());
+  
   $value = $_POST['query'];
   switch ($value)
   {
     case 1:
-      $query = "SELECT name,region,continent,government_form FROM lab2.country WHERE surface_area > 2000000";
+      $query = 'SELECT name,region,continent,government_form FROM nctvyc.lab2.country WHERE surface_area > 2000000;';
       break;
     case 2:
       break;
@@ -66,7 +60,7 @@
     default:
       echo "<strong>Please select a query</strong>";
   }
-    pg_query($query);
+    //$result = pg_query($query) or die('Query failed"' . pg_last_error());;
   
   
   pg_close($conn);
