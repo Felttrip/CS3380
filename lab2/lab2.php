@@ -37,6 +37,8 @@
       echo "Countrys with a surface area over 2000000";
       break;
     case 2:
+      $query = 'SELECT name, language FROM lab2.country AS co, lab2.country_language AS cl WHERE(cl.percentage>50) AND (cl.is_official = false) AND  (co.country_code=cl.country_code)';
+
       break;
     case 3:
       break;
