@@ -44,7 +44,7 @@
       $query = 'SELECT DISTINCT language FROM lab2.country AS co, lab2.country_language AS cl WHERE(cl.percentage<10) AND (cl.is_official = true) ORDER BY language';
       break;
     case 4:
-      $query = 'SELECT co.name as CountryName, ci.population, ci.name, ci.district FROM lab2.country AS co, lab2.city as ci WHERE (co.country_code=ci.country_code) ORDER BY co.name, ci.population DESC, ci.name';
+      $query = 'SELECT ci.name, ci.district, co.name as CountryName FROM lab2.country AS co, lab2.city as ci WHERE (co.country_code=ci.country_code) ORDER BY co.name, ci.population DESC, ci.name';
       break;
     case 5:
       break;
