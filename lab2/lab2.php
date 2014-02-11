@@ -33,7 +33,8 @@
   switch ($value)
   {
     case 1:
-      $query = 'SELECT name,region,continent,government_form FROM nctvyc.lab2.country WHERE surface_area > 2000000;';
+      $query = 'SELECT name,region,continent,government_form FROM lab2.country WHERE surface_area > 2000000';
+      echo "Countrys with a surface area over 2000000";
       break;
     case 2:
       break;
@@ -60,8 +61,18 @@
     default:
       echo "<strong>Please select a query</strong>";
   }
-    //$result = pg_query($query) or die('Query failed"' . pg_last_error());;
-  
-  
+  $result = pg_query($query) or die('Query failed' . pg_last_error());
+    
+  //Print results in HTML
+  echo "<table border=\"1\">\n";
+  while ($line = pg_fetch_array($result, null, PGSQL_ASSOC))
+  {
+    foreach($line as $col_value)
+    {
+      echo "\t\t<td>$col_value</td>\n";
+    }
+    echo "\t</tr>\n";
+  }
+  echo "</table>\n";
   pg_close($conn);
 ?>
