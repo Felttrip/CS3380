@@ -88,8 +88,13 @@
                 ORDER BY indep_year OFFSET 2 LIMIT 5';
       break;
     case 10:
+      $query = 'SELECT name, continent, region, indep_year, government_form,life_expectancy
+                FROM lab2.country
+                WHERE (continent != \'Africa\') AND (life_expectancy IS NOT NULL)
+                ORDER BY life_expectancy LIMIT 20';
       break;
     case 11:
+    
       break;
     case 12:
       break;
