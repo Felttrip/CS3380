@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset=UTF-8>
-    <title>Nathaniel Thompson Lab 2</title>
-  </head>
-
-    <body>
-      <form method = "POST" action = "<?= $_SERVER['PHP_SELF'] ?>">
-      <select name = "query">
-        <option value="1" >Query 1</option>
-        <option value="2" >Query 2</option>
-        <option value="3" >Query 3</option>
-        <option value="4" >Query 4</option>
-        <option value="5" >Query 5</option>
-        <option value="6" >Query 6</option>
-        <option value="7" >Query 7</option>
-        <option value="8" >Query 8</option>
-        <option value="9" >Query 9</option>
-        <option value="10" >Query 10</option>
-        <option value="11" >Query 11</option>
-        <option value="12" >Query 12</option>
-      </select>
-     <input type="submit" name="submit" value="Execute"/>
-    </form>
+<head>
+<meta charset=UTF-8>
+<title>Nathaniel Thompson Lab 2</title>
+</head>
+<body>
+  <form method = "POST" action = "<?= $_SERVER['PHP_SELF'] ?>">
+    <select name = "query">
+      <?php
+        for($i=1;$i<=12;$i++)
+        {
+          if($_POST['query']==$i)
+            echo "<option value= \"".$i."\" selected>Query ".$i."</option>";
+          else
+            echo "<option value= \"".$i."\">Query ".$i."</option>";
+        }
+      ?>
+      <!--
+      <option value="1" >Query 1</option>
+      <option value="2" >Query 2</option>
+      <option value="3" >Query 3</option>
+      <option value="4" >Query 4</option>
+      <option value="5" >Query 5</option>
+      <option value="6" >Query 6</option>
+      <option value="7" >Query 7</option>
+      <option value="8" >Query 8</option>
+      <option value="9" >Query 9</option>
+      <option value="10" >Query 10</option>
+      <option value="11" >Query 11</option>
+      <option value="12" >Query 12</option> -->
+    </select>
+    <input type="submit" name="submit" value="Execute"/>
+  </form>
     
 <?php
   //set up database
   include("../secure/database.php");
   $conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die('Could not connect:' . pg_last_error());
-  
-  $value = $_POST['query'];
   $query = null;
+  //switch case for querys
+  $value = $_POST['query'];
   switch ($value)
   {
     case 1:
@@ -94,9 +103,16 @@
                 ORDER BY life_expectancy LIMIT 20';
       break;
     case 11:
-    
+      $query = 'SELECT name, region, government_form, gnp, gnp_old, (gnp-gnp_old) AS delta 
+                FROM lab2.country
+                WHERE (gnp_old > gnp)
+                ORDER BY delta';
       break;
     case 12:
+      $query = 'SELECT name, round(((gnp/population)*1000000)::numeric,0) AS per_capita_gnp, life_expectancy, government_form
+                FROM lab2.country
+                WHERE (name IS NOT NULL) AND (population > 0)
+                ORDER BY per_capita_gnp DESC';
       break;
     default:
       echo "<strong>Please select a query</strong>";
@@ -135,6 +151,6 @@
   //close connetion with db
   pg_close($conn);
 ?>
-    </body>
-  </head>
+<!--close body and html-->
+</body>
 </html>
