@@ -11,9 +11,9 @@
         for($i=1;$i<=12;$i++)
         {
           if($_POST['query']==$i)
-            echo "<option value= \"".$i."\" selected>Query ".$i."</option>";
+            echo "\t<option value= \"".$i."\" selected>Query ".$i."</option>\n";
           else
-            echo "<option value= \"".$i."\">Query ".$i."</option>";
+            echo "\t<option value= \"".$i."\">Query ".$i."</option>\n";
         }
       ?>
     </select>
