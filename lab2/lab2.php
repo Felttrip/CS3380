@@ -6,7 +6,6 @@
   </head>
 
     <body>
-      <p>YO what up!</p>
       <form method = "POST" action = "<?= $_SERVER['PHP_SELF'] ?>">
       <select name = "query">
         <option value="1" >Query 1</option>
@@ -94,20 +93,26 @@
     default:
       echo "<strong>Please select a query</strong>";
   }
+  //check for a query
   if($query)
   {
+    //send query to db
     $result = pg_query($query) or die('Query failed' . pg_last_error());
+    //print out number of rows
     echo "\n<br/>\n<hr/>\n<br/>\n\nThere were <em>".pg_num_rows($result)."</em> rows returned<br/><br/>";
-    //Print results in HTML
+    //Print table
     echo "\n<table border=\"1\">\n\t<tr>\n";
-    while ($i < pg_num_fields($result))
+    //print field names
+    $i = 0;
+    $numFields = pg_num_fields($result);
+    while ($i < $numFields)
     {
       $fieldName = pg_field_name($result, $i);
       echo "\t\t<th>" . $fieldName . "</th>\n";
-      $i = $i + 1;
+      $i ++;
     }
     echo "\t</tr>\n";
-    $i = 0;
+    //print rows and columns
     while ($line = pg_fetch_array($result, null, PGSQL_ASSOC))
     {
       echo "\t<tr>\n";
@@ -119,7 +124,8 @@
     }
     echo "</table>\n";
   }
-    pg_close($conn);
+  //close connetion with db
+  pg_close($conn);
 ?>
     </body>
   </head>
