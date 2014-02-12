@@ -1,3 +1,5 @@
+<!--Nathaniel Thompson
+    Lab 2 2/12/14 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,8 +7,10 @@
 <title>Nathaniel Thompson Lab 2</title>
 </head>
 <body>
+  <!--Set up form -->
   <form method = "POST" action = "<?= $_SERVER['PHP_SELF'] ?>">
     <select name = "query">
+      <!--a little php to keep the selection on page refresh-->
       <?php
         for($i=1;$i<=12;$i++)
         {
@@ -25,6 +29,7 @@
   include("../secure/database.php");
   $conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die('Could not connect:' . pg_last_error());
   $query = null;
+
   //switch case for querys
   $value = $_POST['query'];
   switch ($value)
