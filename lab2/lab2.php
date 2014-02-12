@@ -82,7 +82,10 @@
                 ORDER BY co.name';
       break;
     case 9:
-      $query = 'SELECT ';
+      $query = 'SELECT name, indep_year, region,life_expectancy,gnp,government_form
+                FROM lab2.country
+                WHERE (indep_year IS NOT NULL)
+                ORDER BY indep_year OFFSET 2 LIMIT 5';
       break;
     case 10:
       break;
