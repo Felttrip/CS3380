@@ -6,6 +6,7 @@
   </head>
 
     <body>
+      <p>YO what up!</p>
       <form method = "POST" action = "<?= $_SERVER['PHP_SELF'] ?>">
       <select name = "query">
         <option value="1" >Query 1</option>
