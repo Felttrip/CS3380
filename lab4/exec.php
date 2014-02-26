@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Nathaniel Thompson Lab 3</title>
+<meta charset=UTF-8>
+<title>Nathaniel Thompson Lab 4</title>
 </head>
 <body>
 <?php
@@ -83,15 +84,19 @@
 		else if($table =='city')
 			$result = pg_prepare($conn, "edit_query",'SELECT * FROM lab4.city as ci WHERE ci.id = $1');
 		else if($table =='language')
-			$result = pg_prepare($conn, "edit_query",'SELECT * FROM lab4.country_language as la WHERE la.country_code LIKE $1');
+			$result = pg_prepare($conn, "edit_query",'SELECT * FROM lab4.country_language as la WHERE la.country_code LIKE $1 AND la.language LIKE $2');
+		
 		//query the BD
-		$result = pg_execute($conn, "edit_query",array($key));
-
+		if($table =='language')
+			$result = pg_execute($conn, "edit_query",array($key,$_POST['key2']));
+		else
+			$result = pg_execute($conn, "edit_query",array($key));
+		
 		//Print table
   	echo "\n<table border=\"1\">\n\t<tr>\n";
   	//print field names
 	  $numFields = pg_num_fields($result);
-	  $line = pg_fetch_array($result, null, PGSQL_NUM);
+	  $line = pg_fetch_array($result, null, PGSQL_ASSOC);
 	  echo "\t\t<form method=\"POST\" action=\"exec.php\">\n";
 	  echo "\t\t<th>Actions</th>\n";
 	  echo "\t\t<th>Values</th>\n\t</tr>\n";
@@ -102,12 +107,12 @@
   		if($fieldName == "population"||$fieldName == "life_expectancy"||$fieldName == "gnp"||$fieldName == "head_of_state"||$fieldName == "is_official"||$fieldName == "percentage")
   		{
   			echo "\t\t<td><strong>" . $fieldName . "</strong></td>\n";
-    		echo "\t\t<td><input type=\"text\" name=".$fieldName." value = ".$line[$i]." /></td>\n";
+    		echo "\t\t<td><input type=\"text\" name=".$fieldName." value = ".$line[$fieldName]." /></td>\n";
   		}
   		else
   		{
   			echo "\t\t<td>" . $fieldName . "</td>\n";
-    		echo "\t\t<td>" . $line[$i] . "</td>\n";
+    		echo "\t\t<td>" . $line[$fieldName] . "</td>\n";
   		}
   		echo "\t</tr>\n";
  		}

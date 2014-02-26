@@ -1,8 +1,8 @@
 <!DOCTYPE HML>
 <html>
 <head>
-<meta charset=UTF-8>
-<title>Nathaniel Thompson Lab 3</title>
+<meta charset=UTF-8 >
+<title>Nathaniel Thompson Lab 4</title>
 </head>
 <body>
 
@@ -76,6 +76,10 @@ Or insert a new city by clicking this <a href="exec.php?action=insert">link</a>
           <input type="submit" name="action" value="Remove" />
           <input type="hidden" name="table" value=<?php echo $search_by;?> />
           <input type="hidden" name="key" value=<?php echo $line[0];?> />
+          <?php 
+          if($search_by=="language")
+            echo "<input type=\"hidden\" name=\"key2\" value=".$line[1]." />";
+          ?>
           </form>
       </td>
       <?php
