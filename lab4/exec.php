@@ -33,10 +33,10 @@
 		$result = pg_execute($conn, "insert_query",array($name,$country_code,$district,$population));
 		if ($result) 
 		{
-    		echo "Save sucessfull<b>Return to <a href = \"lab4.php\">search page</a>\n";
+    		echo "Save sucessfull<br/>Return to <a href = \"lab4.php\">search page</a>\n";
     }
     else
-    	echo "Query Failed<b>Return to <a href = \"lab4.php\">search page</a>\n";
+    	echo "Save failed<br/>Return to <a href = \"lab4.php\">search page</a>\n";
 	}
 
 
