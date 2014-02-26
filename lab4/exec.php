@@ -44,7 +44,7 @@
 	else if($get_action == "insert")
 	{
 		//select all of the avalable contry codes for the list
-		$result = pg_prepare($conn,"I'm only writing this prepare statement so I don't lose points",'SELECT country_code, name FROM lab4.country');
+		$result = pg_prepare($conn,"I'm only writing this prepare statement so I don't lose points",'SELECT country_code, name FROM lab4.country ORDER BY name');
 		$result = pg_execute($conn,"I'm only writing this prepare statement so I don't lose points",array());
 ?>
 	<!--end php to write html -->

@@ -5,7 +5,9 @@
 <title>Nathaniel Thompson Lab 4</title>
 </head>
 <body>
-
+<div id = "title">
+  <h3>Nate Thompson Lab 4</h3>
+</div>
 <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>">
     Search for a :
     <input type="radio" name="search_by" value="country"  />Country 
@@ -55,7 +57,7 @@ Or insert a new city by clicking this <a href="exec.php?action=insert">link</a>
   	echo "\n<br/>\n<hr/>\n<br/>\n\nThere were <em>".pg_num_rows($result)."</em> rows returned<br/><br/>";
   
   	//Print table
-  	echo "\n<table border=\"1\">\n\t<tr>\n";
+  	echo "\n<table border=\"5\">\n\t<tr>\n";
   	//print field names
 	  $numFields = pg_num_fields($result);
 	  echo "\t\t<th>Actions</th>\n";
