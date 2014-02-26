@@ -29,7 +29,7 @@ Or insert a new city by clicking this <a href="exec.php?action=insert">link</a>
   //using pg_prepare
   $result = pg_prepare($conn, "country_query",'SELECT * FROM lab4.country as co WHERE co.name ILIKE $1 ORDER BY co.name');
   $result = pg_prepare($conn, "city_query",'SELECT * FROM lab4.city as ci WHERE ci.name ILIKE $1 ORDER BY ci.name');
-  $result = pg_prepare($conn, "language_query",'SELECT * FROM lab4.country_language as la WHERE la.language ILIKE $1 ORDER BY la.name');
+  $result = pg_prepare($conn, "language_query",'SELECT * FROM lab4.country_language as la WHERE la.language ILIKE $1 ORDER BY la.language');
 
   //using pg_execute
   if($search_by=="country")
@@ -43,16 +43,14 @@ Or insert a new city by clicking this <a href="exec.php?action=insert">link</a>
   else if($search_by=="language")
   {
   	$result = pg_execute($conn, "language_query", array($query_part."%"));
+
   }
   else
   {
   	$result = NULL;
   }
-  
   if($result!=NULL)
 	{
-		
-  
   	//print out number of rows
   	echo "\n<br/>\n<hr/>\n<br/>\n\nThere were <em>".pg_num_rows($result)."</em> rows returned<br/><br/>";
   
@@ -72,14 +70,15 @@ Or insert a new city by clicking this <a href="exec.php?action=insert">link</a>
   	{
   		?>
     	<tr>
-    	<td><form method = "POST" action = "exec.php">
+    	<td>
+          <form method = "POST" action = "exec.php">
           <input type="submit" name="action" value="Edit" />
           <input type="submit" name="action" value="Remove" />
           <input type="hidden" name="table" value=<?php echo $search_by;?> />
           <input type="hidden" name="key" value=<?php echo $line[0];?> />
           </form>
-        </td>
-    	<?php
+      </td>
+      <?php
     	foreach($line as $col_value)
     	{
       	echo "\t\t<td>$col_value</td>\n";
