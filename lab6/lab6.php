@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset=UTF-8>
-<title>Nathaniel Thompson Lab 6</title>
+<title>Nathaniel Thompson Lab 6|<a href="../index.php">Home</a></title>
 </head>
 <body>
   <!--Set up form -->

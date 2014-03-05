@@ -4,8 +4,11 @@
 
 <!--HTML givin from lab-->
 <html>
+<head>
+  <title>Lab 1</title>
 <head/>
 <body>
+<h3>Nate Thompson Lab 1|<a href="../index.php">Home</a></h3>
 <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>">
   <table border="1">
      <tr><td>Number of Rows:</td><td><input type="text" name="rows" /></td></tr>

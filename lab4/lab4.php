@@ -1,12 +1,12 @@
-<!DOCTYPE HML>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset=UTF-8 >
-<title>Nathaniel Thompson Lab 4</title>
+<title>Lab 4</title>
 </head>
 <body>
 <div id = "title">
-  <h3>Nate Thompson Lab 4</h3>
+  <h3>Nate Thompson Lab 4|<a href="../index.php">Home</a></h3>
 </div>
 <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>">
     Search for a :
@@ -23,7 +23,7 @@ Or insert a new city by clicking this <a href="exec.php?action=insert">link</a>
   //set up database
   include("../secure/database.php");
   $conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die('Could not connect:' . pg_last_error());
-
+  
   //grab variables from post
   $search_by = htmlspecialchars($_POST['search_by']);
   $query_part = $_POST['query_string'];

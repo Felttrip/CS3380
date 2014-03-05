@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset=UTF-8>
-<title>Nathaniel Thompson Lab 2</title>
+<title>Lab 2</title>
 </head>
 <body>
+  <h3>Nate Thompson Lab 2|<a href="../index.php">Home</a></h3>
   <!--Set up form -->
   <form method = "POST" action = "<?= $_SERVER['PHP_SELF'] ?>">
     <select name = "query">
@@ -26,7 +27,7 @@
     
 <?php
   //set up database
-  include("../secure/database.php");
+  include('../secure/database.php');
   $conn = pg_connect(HOST." ".DBNAME." ".USERNAME." ".PASSWORD) or die('Could not connect:' . pg_last_error());
   $query = null;
 
