@@ -48,7 +48,7 @@ function get_query($value)
                 WHERE pops.name = co.name
                 ORDER BY percentage';
       break;
-    case 6:/*NOT FINISHED*/
+    case 6:
       $query = 'SELECT pops.name, ci.name as cityName, pops.population 
                 FROM 
                 (SELECT country.name as name, MAX(city.population) AS population
