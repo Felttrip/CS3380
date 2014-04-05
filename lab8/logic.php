@@ -22,7 +22,8 @@ $query = 'SELECT salt FROM lab8.authentication WHERE username LIKE $1';
 
 function check_username_exists($username)
 {
-	$username = pg_escape_string($username);
+	$username = pg_escape_string(htmlspecialchars($username));
+	$password = pg_escape_string(htmlspecialchars($password));
 	$query = "SELECT * FROM lab8.user_info where username LIKE '".$username."'";
 	$result = pg_query($query);
 	//$result = pg_execute($conn,"check_for_user",array($username));
@@ -34,6 +35,8 @@ function check_username_exists($username)
 
 function add_user($username,$password)
 {
+	$username = pg_escape_string(htmlspecialchars($username));
+	$password = pg_escape_string(htmlspecialchars($password));
 	$salt = sha1(rand());
 	$hash = sha1($password . $salt);
 	$query = "INSERT INTO lab8.user_info (username) VALUES ('".$username."')";
@@ -46,6 +49,8 @@ function add_user($username,$password)
 
 function check_username_and_password($username,$password)
 {
+	$username = pg_escape_string(htmlspecialchars($username));
+	$password = pg_escape_string(htmlspecialchars($password));
 	//get salt and hash from db
 	$query = "SELECT salt, password_hash FROM lab8.authentication WHERE username LIKE '".$username."'";
 	$result = pg_query($query);
@@ -64,16 +69,25 @@ function check_username_and_password($username,$password)
 
 function registration_date($username)
 {
-	$username = pg_escape_string($username);
+	$username = pg_escape_string(htmlspecialchars($username));
 	$query = "SELECT registration_date FROM lab8.user_info where username LIKE '".$username."'";
 	$result = pg_query($query);
 	$line = pg_fetch_array($result, null, PGSQL_ASSOC);
 	return $line['registration_date'];
+
+}
+function first_ip($username)
+{
+	$username = pg_escape_string(htmlspecialchars($username));
+	$query = "SELECT ip_address FROM lab8.log where username LIKE '".$username."' ORDER BY log_date desc LIMIT 1";
+	$result = pg_query($query);	
+	$line = pg_fetch_array($result, null, PGSQL_ASSOC);
+	return $line['ip_address'];	
 }
 function print_logs($username)
 {
-	$username = pg_escape_string($username);
-	$query = "SELECT ip_address, log_date FROM lab8.log where username LIKE '".$username."' ORDER BY log_date";
+	$username = pg_escape_string(htmlspecialchars($username));
+	$query = "SELECT ip_address, log_date FROM lab8.log where username LIKE '".$username."' ORDER BY log_date desc";
 	$result = pg_query($query);
 	//Print table
     echo "\n<table border=\"1\">\n\t<tr>\n";
@@ -102,7 +116,30 @@ function print_logs($username)
 
 function store_login_data($username, $ip, $action)
 {
+	$username = pg_escape_string(htmlspecialchars($username));
+	$ip = pg_escape_string(htmlspecialchars($ip));
+	$action = pg_escape_string(htmlspecialchars($action));
 	$query = "INSERT INTO lab8.log (username, ip_address,action) VALUES ('".$username."','".$ip."','".$action."')";
 	pg_query($query);
 }
+
+function update_desc($username, $description)
+{
+	$username = pg_escape_string(htmlspecialchars($username));
+	$description = pg_escape_string(htmlspecialchars($description));
+	$query = "UPDATE lab8.user_info SET description ='".$description."' WHERE username LIKE '".$username."'";
+	pg_query($query);
+
+}
+
+function print_desc($username)
+{
+	$username = pg_escape_string(htmlspecialchars($username));
+	$query = "SELECT description FROM lab8.user_info where username LIKE '".$username."'";
+	$result = pg_query($query);
+	$line = pg_fetch_array($result, null, PGSQL_ASSOC);
+	echo $line['description'];
+
+}
+
 ?>

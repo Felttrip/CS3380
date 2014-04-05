@@ -28,10 +28,13 @@
 		//check if the name exists
 		if(check_username_exists($username)==0)
 		{
+			$ipaddress = $_SERVER["REMOTE_ADDR"];
+			$action = "login";
 			//create user if username is unique
 			add_user($username,$password);
+			//log the user in and log the login
+			store_login_data($username, $ipaddress, $action);
 			$_SESSION['username'] = $username;
-			$_SESSION['password'] = $password;
 			header("Location: home.php");
 		}
 		else
