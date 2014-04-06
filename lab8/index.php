@@ -9,9 +9,9 @@
 		<fieldset >
 			<legend>Login</legend>
 			<label for='username' >UserName:</label>
-			<input type='text' name='username' id='username' maxlength="50" /> 
+			<input type='text' name='username' id='username' maxlength="50" required/> 
 			<label for='password' >Password:</label>
-			<input type='password' name='password' id='password' maxlength="50" />
+			<input type='password' name='password' id='password' maxlength="50" required/>
 			<input type='submit' name='Submit' value='Submit' />
 		</fieldset>
 	</form>
@@ -19,20 +19,22 @@
 <?php
 	include('logic.php');
 	session_start();
-	//if a session exists redirest to home
+	//if a session exists redirect to home
 	if(isset($_SESSION['username']))
 		header("Location: home.php");
-	//get ip and date
 	
+	//on form submission
 	if (isset( $_POST['Submit'] ) )
 	{
 		//collect username and password from post
 		$username = htmlspecialchars($_POST['username']);
 		$password = htmlspecialchars($_POST['password']);
+		//get ip
 		$ipaddress = $_SERVER["REMOTE_ADDR"];
+		//set action
 		$action = "login";
 		//check credentials		
-	  if(check_username_and_password($username,$password)==1)
+	  if(check_username_and_password($username,$password,$conn)==1)
 	  {
 	  	//set username
 	  	$_SESSION['username'] = $username;

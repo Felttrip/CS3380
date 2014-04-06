@@ -8,9 +8,9 @@
 		<fieldset >
 			<legend>Register</legend>
 			<label for='username' >UserName*:</label>
-			<input type='text' name='username' id='username' maxlength="50" /> 
+			<input type='text' name='username' id='username' maxlength="50" required/> 
 			<label for='password' >Password*:</label>
-			<input type='password' name='password' id='password' maxlength="50" />
+			<input type='password' name='password' id='password' maxlength="50" required/>
 			<input type='submit' name='Submit' value='Submit' />
 		</fieldset>
 	</form>
@@ -29,7 +29,7 @@
 		if(check_username_exists($username)==0)
 		{
 			$ipaddress = $_SERVER["REMOTE_ADDR"];
-			$action = "login";
+			$action = "register";
 			//create user if username is unique
 			add_user($username,$password);
 			//log the user in and log the login
