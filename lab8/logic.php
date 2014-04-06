@@ -81,7 +81,7 @@ function first_ip($username)
 {
 	global $conn;
 	$username = pg_escape_string(htmlspecialchars($username));
-	$query = "SELECT ip_address FROM lab8.log where username LIKE $1 ORDER BY log_date desc LIMIT 1";
+	$query = "SELECT ip_address FROM lab8.log where username LIKE $1 ORDER BY log_date LIMIT 1";
 	pg_prepare($conn,"get_ip",$query);
 	$result = pg_execute($conn,"get_ip",array($username));
 	$line = pg_fetch_array($result, null, PGSQL_ASSOC);
@@ -93,7 +93,7 @@ function print_logs($username)
 {
 	global $conn;
 	$username = pg_escape_string(htmlspecialchars($username));
-	$query = "SELECT ip_address, log_date FROM lab8.log where username LIKE $1 ORDER BY log_date";
+	$query = "SELECT ip_address, log_date FROM lab8.log where username LIKE $1 ORDER BY log_date desc";
 	pg_prepare($conn,"get_logs",$query);
 	$result = pg_execute($conn,"get_logs",array($username));
 	//Print table
