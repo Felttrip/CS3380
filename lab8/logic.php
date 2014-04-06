@@ -81,7 +81,7 @@ function first_ip($username)
 {
 	global $conn;
 	$username = pg_escape_string(htmlspecialchars($username));
-	$query = "SELECT ip_address FROM lab8.log where username LIKE $1 AND action LIKE 'register'";
+	$query = "SELECT ip_address FROM lab8.log where username LIKE $1 AND ORDER BY log_date desc LIMIT 1";
 	pg_prepare($conn,"get_ip",$query);
 	$result = pg_execute($conn,"get_ip",array($username));
 	$line = pg_fetch_array($result, null, PGSQL_ASSOC);
