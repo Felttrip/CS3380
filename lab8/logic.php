@@ -93,7 +93,7 @@ function print_logs($username)
 {
 	global $conn;
 	$username = pg_escape_string(htmlspecialchars($username));
-	$query = "SELECT ip_address, log_date FROM lab8.log where username LIKE $1 ORDER BY log_date desc";
+	$query = "SELECT ip_address, log_date FROM lab8.log where username LIKE $1 ORDER BY log_date";
 	pg_prepare($conn,"get_logs",$query);
 	$result = pg_execute($conn,"get_logs",array($username));
 	//Print table
